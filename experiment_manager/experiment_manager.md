@@ -1,7 +1,7 @@
-OpenSesame Plugin: Experiment Manager
+OpenSesame Plug-in: Experiment Manager
 ==========
 
-*An OpenSesame Plugin for managing seperate OpenSesame experiments.*  
+*An OpenSesame Plug-in for managing seperate OpenSesame experiments.*  
 
 Copyright, 2015, Bob Rosbag  
 
@@ -9,7 +9,7 @@ Copyright, 2015, Bob Rosbag
 1. About
 --------
 
-This plugin can run seperate OpenSesame Experiments in a loop or a single experiment as an item of the main experiment. It is possible to run a number of experiments in sequence (random or fixed order) with different backends. 
+This plug-in can run seperate OpenSesame Experiments in a loop or a single experiment as an item of the main experiment. It is possible to run a number of experiments in sequence (random or fixed order) with different backends. 
 
 
 
