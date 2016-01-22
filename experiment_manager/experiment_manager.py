@@ -66,7 +66,7 @@ class experiment_manager(item):
         # you can pass a timestamp, such as returned by canvas.show().
 
         ## get variables
-        subject_nr    = self.get("subject_nr")
+        subject_nr    = self.var.subject_nr
         home_path     = os.path.dirname(self.experiment.logfile)
         
         ## create file names
