@@ -84,10 +84,12 @@ class experiment_manager(item):
         screen_arg    = u'--fullscreen'
 
         args = [command, exp_file_path, subject_arg, log_arg, screen_arg]
-        print(args)
-
-        subprocess.call(args)
-
+        debug.msg(args)
+        
+        try:
+            subprocess.call(args)
+        except Exception as e:
+            raise osexception(u'Could not execute experiment', exception=e)
 
 class qtexperiment_manager(experiment_manager, qtautoplugin):
 
