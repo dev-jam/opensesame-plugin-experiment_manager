@@ -1,0 +1,81 @@
+---
+API: 2
+OpenSesame: 3.0.7
+Platform: posix
+---
+set width 1024
+set uniform_coordinates yes
+set title "New experiment"
+set subject_parity even
+set subject_nr 0
+set start experiment
+set sampler_backend legacy
+set mouse_backend legacy
+set keyboard_backend legacy
+set height 768
+set foreground white
+set font_size 18
+set font_italic no
+set font_family mono
+set font_bold no
+set experiment_path "/home/bob/src/git/opensesame_plugin_-_experiment_manager/examples"
+set description "Default description"
+set coordinates uniform
+set compensation 0
+set color_backend legacy
+set clock_backend legacy
+set canvas_backend legacy
+set bidi no
+set background black
+
+define sequence experiment
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run new_loop always
+	run welcome always
+
+define notepad getting_started
+	__note__
+	Welcome to OpenSesame 3.0 "Interactive Ising"!
+	If you are new to OpenSesame, it is a good idea to follow one of the tutorials,
+	which can be found on the documentation site:
+	- <http://osdoc.cogsci.nl/>
+	You can also check out the examples. These can be opened via:
+	- Menu -> Tools -> Example experiments.
+	And feel free to ask for help on the forum:
+	- <http://forum.cogsci.nl/>
+	Have fun with OpenSesame!
+	__end__
+	set description "Some pointers to help you get started!"
+
+define experiment_manager new_experiment_manager
+	set experiment_fname "[exp]"
+	set description "Experiment Manager Plugin"
+
+define loop new_loop
+	set skip 0
+	set repeat 1
+	set order random
+	set offset no
+	set item new_sequence
+	set description "Repeatedly runs another item"
+	set cycles 3
+	set column_order exp
+	set break_if never
+	setcycle 0 exp "test1.osexp"
+	setcycle 1 exp "test2.osexp"
+	setcycle 2 exp "test3.osexp"
+	run new_sequence
+
+define sequence new_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run new_experiment_manager always
+
+define sketchpad welcome
+	set start_response_interval no
+	set reset_variables no
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=serif font_italic=no font_size=32 html=yes show_if=always text="Done!" x=0 y=0 z_index=0
+
