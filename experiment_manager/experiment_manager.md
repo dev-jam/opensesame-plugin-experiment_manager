@@ -14,6 +14,11 @@ It can run within a loop or sequence as an item. This makes it possible to run a
 of experiments in sequence (random or fixed order) and also it gives the possibility to 
 give each experiment its own (different) backend. 
 
+This plug-in has three options:
+- *Dummy mode* for testing experiments.
+- *Verbose mode* for testing experiments.
+- *Experiment file name* for Windows: hexadecimal or decimal value, for Linux: full path or port number.
+
 
 ## 2. LICENSE
 ----------

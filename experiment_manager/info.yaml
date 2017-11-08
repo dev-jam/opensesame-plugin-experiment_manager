@@ -1,13 +1,10 @@
-description: Experiment Manager plug-in.
+description: Experiment Manager - start a opensesame experiment.
 version: 2017.11-1
 author: "Bob Rosbag"
 url: "http://osdoc.cogsci.nl/"
 category: "control"
 date: "2017"
 controls:
--
-    label: "IMPORTANT: The experiment should be started in windowed mode!"
-    type: "text"
 -
     label: "Dummy Mode"
     name: "checkbox_dummy"
@@ -26,6 +23,14 @@ controls:
     tooltip: "A variable pointing to the file name(s) of the experiment(s) is expected"
     type: "filepool"
     var: "experiment_fname"
+-
+    label: |
+      <b>IMPORTANT:</b> The experiment should be started in windowed mode!
+    type: "text"
+-
+    label: |
+      <small><b>Note:</b> Parallel Port Trigger Init item at the begin of the experiment is needed for initialisation of the parallel port</small>
+    type: text
 -
     type: text
     label: DUMMY

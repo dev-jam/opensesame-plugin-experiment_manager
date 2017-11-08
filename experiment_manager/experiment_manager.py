@@ -39,7 +39,7 @@ class experiment_manager(item):
     """
 
     # Provide an informative description for your plug-in.
-    description = u'Experiment Manager Plugin'
+    description = u'Experiment Manager: start a opensesame experiment.'
 
     def __init__(self, name, experiment, string=None):
 
