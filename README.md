@@ -6,7 +6,7 @@ OpenSesame Plug-in: Experiment Manager
 Copyright, 2015, Bob Rosbag  
 
 
-1. About
+## 1. About
 --------
 
 This plug-in can insert standalone OpenSesame Experiments within a main experiment. 
@@ -15,7 +15,7 @@ of experiments in sequence (random or fixed order) and also it gives the possibi
 give each experiment its own (different) backend. 
 
 
-2. LICENSE
+## 2. LICENSE
 ----------
 
 The Experiment Manager Plug-in is distributed under the terms of the GNU General Public License 3.
@@ -23,11 +23,11 @@ The full license should be included in the file COPYING, or can be obtained from
 
 - <http://www.gnu.org/licenses/gpl.txt>
 
-This Plugin contains works of others. For the full license information, please
+This plug-in contains works of others. For the full license information, please
 refer to `debian/copyright`.
 
 
-3. Documentation
+## 3. Documentation
 ----------------
 
 Installation instructions and documentation on OpenSesame are available on the documentation website:
