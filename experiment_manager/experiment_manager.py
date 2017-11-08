@@ -27,7 +27,9 @@ from libopensesame.py3compat import *
 from libopensesame import debug
 from libopensesame.item import item
 from libqtopensesame.items.qtautoplugin import qtautoplugin
+from libopensesame.exceptions import osexception
 
+VERSION = u'2017.11-1'
 
 class experiment_manager(item):
 
@@ -39,15 +41,31 @@ class experiment_manager(item):
     # Provide an informative description for your plug-in.
     description = u'Experiment Manager Plugin'
 
+    def __init__(self, name, experiment, string=None):
+
+        item.__init__(self, name, experiment, string)
+        self.verbose = u'no'
+
+
     def reset(self):
 
         """Resets plug-in to initial values."""
 
         # Set default experimental variables and values
         self.var.experiment_fname = u'example.osexp'
-        # Debugging output is only visible when OpenSesame is started with the
-        # --debug argument.
-        debug.msg(u'Experiment Manager plug-in has been initialized!')
+        self.var.dummy_mode = u'no'
+        self.var.verbose = u'no'
+
+        self.show_message(u'Experiment Manager plug-in has been initialized!')
+
+
+    def init_var(self):
+
+        """Set en check variables."""
+
+        self.verbose = self.var.verbose
+        self.dummy_mode = self.var.dummy_mode
+
 
 
     def prepare(self):
@@ -57,26 +75,29 @@ class experiment_manager(item):
         # Call the parent constructor.
         item.prepare(self)
 
+        self.init_var()
+
 
     def run(self):
 
         """Run phase"""
 
-        # self.set_item_onset() sets the time_[item name] variable. Optionally,
-        # you can pass a timestamp, such as returned by canvas.show().
+        self.subject_nr = self.var.subject_nr
+        self.experiment_fname = self.var.experiment_fname
+        self.experiment.var.experiment_fname = self.var.experiment_fname
 
         ## get variables
-        subject_nr    = self.var.subject_nr
+        subject_nr    = self.subject_nr
         home_path     = os.path.dirname(self.experiment.logfile)
-        
+
         ## create file names
-        exp_file_name = self.var.experiment_fname
+        exp_file_name = self.experiment_fname
         log_file_name = exp_file_name + u'_-_' + u'subject-' + str(subject_nr) + u'.csv'
-        
+
         ## create paths
         exp_file_path = os.path.join(home_path, exp_file_name)
         log_file_path = os.path.join(home_path, log_file_name)
-        
+
         ## create cmds and args
         command       = u'opensesamerun'
         subject_arg   = u'--subject=' + str(subject_nr)
@@ -84,18 +105,36 @@ class experiment_manager(item):
         screen_arg    = u'--fullscreen'
 
         args = [command, exp_file_path, subject_arg, log_arg, screen_arg]
-        debug.msg(args)
-        
-        try:
-            subprocess.call(args)
-        except Exception as e:
-            raise osexception(u'Could not execute experiment', exception=e)
+        self.show_message(args)
+
+        if self.dummy_mode == u'no':
+            try:
+                subprocess.call(args)
+            except Exception as e:
+                raise osexception(u'Could not execute experiment', exception=e)
+        elif self.dummy_mode == u'yes':
+            self.show_message(u'Dummy mode enabled, run phase')
+        else:
+            self.show_message(u'Error with dummy mode, mode is: %s' % self.dummy_mode)
+
+    def show_message(self, message):
+        """
+        desc:
+            Show message.
+        """
+
+        debug.msg(message)
+        if self.verbose == u'yes':
+            print(message)
+
 
 class qtexperiment_manager(experiment_manager, qtautoplugin):
 
     def __init__(self, name, experiment, script=None):
 
         """Experiment Manager plug-in GUI"""
-        
+
         experiment_manager.__init__(self, name, experiment, script)
         qtautoplugin.__init__(self, __file__)
+        self.text_version.setText(
+        u'<small>Parallel Port Trigger version %s</small>' % VERSION)

@@ -1,17 +1,32 @@
 description: Experiment Manager plug-in.
-version: 1.0
+version: 2017.11-1
 author: "Bob Rosbag"
 url: "http://osdoc.cogsci.nl/"
 category: "control"
-date: "2016"
+date: "2017"
 controls:
 -
     label: "IMPORTANT: The experiment should be started in windowed mode!"
     type: "text"
 -
-
+    label: "Dummy Mode"
+    name: "checkbox_dummy"
+    tooltip: "Run in dummy mode"
+    type: "checkbox"
+    var: "dummy_mode"
+-
+    label: "Verbose Mode"
+    name: "checkbox_verbose"
+    tooltip: "Show actions in debug window"
+    type: "checkbox"
+    var: "verbose"
+-
     label: "Experiment file name or variable"
-    name: "experiment_file_name"
+    name: "filepool_experiment_file_name"
     tooltip: "A variable pointing to the file name(s) of the experiment(s) is expected"
-    type: "line_edit"
+    type: "filepool"
     var: "experiment_fname"
+-
+    type: text
+    label: DUMMY
+    name: text_version
