@@ -22,7 +22,7 @@ controls:
     name: "filepool_experiment_file_name"
     tooltip: "A variable pointing to the file name(s) of the experiment(s) is expected"
     type: "filepool"
-    var: "experiment_fname"
+    var: "filename"
 -
     label: |
       <b>IMPORTANT:</b> The experiment should be started in windowed mode!

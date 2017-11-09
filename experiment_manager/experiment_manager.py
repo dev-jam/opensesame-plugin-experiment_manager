@@ -52,7 +52,7 @@ class experiment_manager(item):
         """Resets plug-in to initial values."""
 
         # Set default experimental variables and values
-        self.var.experiment_fname = u'example.osexp'
+        self.var.filename = u'example.osexp'
         self.var.dummy_mode = u'no'
         self.var.verbose = u'no'
 
@@ -83,15 +83,15 @@ class experiment_manager(item):
         """Run phase"""
 
         self.subject_nr = self.var.subject_nr
-        self.experiment_fname = self.var.experiment_fname
-        self.experiment.var.experiment_fname = self.var.experiment_fname
+        self.filename = self.experiment.pool[self.var.filename]
+        self.experiment.var.filename = self.experiment.pool[self.var.filename]
 
         ## get variables
         subject_nr    = self.subject_nr
         home_path     = os.path.dirname(self.experiment.logfile)
 
         ## create file names
-        exp_file_name = self.experiment_fname
+        exp_file_name = self.filename
         log_file_name = exp_file_name + u'_-_' + u'subject-' + str(subject_nr) + u'.csv'
 
         ## create paths
