@@ -106,6 +106,7 @@ class experiment_manager(item):
 
         args = [command, exp_file_path, subject_arg, log_arg, screen_arg]
         self.show_message(args)
+        self.set_item_onset()
 
         if self.dummy_mode == u'no':
             try:
