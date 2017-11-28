@@ -18,9 +18,9 @@ controls:
     type: "checkbox"
     var: "verbose"
 -
-    label: "Experiment file name or variable"
+    label: "Experiment file name"
     name: "filepool_experiment_file_name"
-    tooltip: "A variable pointing to the file name(s) of the experiment(s) is expected"
+    tooltip: "File name of the experiment"
     type: "filepool"
     var: "filename"
 -
