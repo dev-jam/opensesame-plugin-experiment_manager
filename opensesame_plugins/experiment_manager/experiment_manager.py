@@ -26,7 +26,7 @@ from libopensesame.item import item
 from libqtopensesame.items.qtautoplugin import qtautoplugin
 from libopensesame.exceptions import osexception
 
-VERSION = u'2017.11-1'
+VERSION = u'2020.1-1'
 
 class experiment_manager(item):
 
@@ -134,5 +134,4 @@ class qtexperiment_manager(experiment_manager, qtautoplugin):
 
         experiment_manager.__init__(self, name, experiment, script)
         qtautoplugin.__init__(self, __file__)
-        self.text_version.setText(
-        u'<small>Parallel Port Trigger version %s</small>' % VERSION)
+

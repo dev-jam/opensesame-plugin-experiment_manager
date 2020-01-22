@@ -3,7 +3,7 @@ OpenSesame Plug-in: Experiment Manager
 
 *An OpenSesame Plug-in for managing/executing multiple OpenSesame experiments.*  
 
-Copyright, 2016, Bob Rosbag  
+Copyright, 2020, Bob Rosbag  
 
 
 ## 1. About
