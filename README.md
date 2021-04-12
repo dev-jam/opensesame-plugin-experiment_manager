@@ -3,7 +3,7 @@ OpenSesame Plug-in: Experiment Manager
 
 *An OpenSesame Plug-in for managing/executing multiple OpenSesame experiments.*  
 
-Copyright, 2015, Bob Rosbag  
+Copyright, 2021, Bob Rosbag  
 
 
 ## 1. About
@@ -15,6 +15,7 @@ of experiments in sequence (random or fixed order) and also it gives the possibi
 give each experiment its own (different) backend. 
 
 This plug-in has three options:
+
 - *Dummy mode* for testing experiments.
 - *Verbose mode* for testing experiments.
 - *Experiment file name* for Windows: hexadecimal or decimal value, for Linux: full path or port number.
@@ -28,8 +29,7 @@ The full license should be included in the file COPYING, or can be obtained from
 
 - <http://www.gnu.org/licenses/gpl.txt>
 
-This plug-in contains works of others. For the full license information, please
-refer to `debian/copyright`.
+This plug-in contains works of others.
 
 
 ## 3. Documentation
