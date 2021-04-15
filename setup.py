@@ -25,7 +25,7 @@ setup(
     # Some general metadata. By convention, a plugin is named:
     # opensesame-plugin-[plugin name]
     name='opensesame-plugin-experiment_manager',
-    version='1.0.2',
+    version='2.0.0',
     description='An OpenSesame Plug-in for managing/executing multiple OpenSesame experiments.',
     author='Bob Rosbag',
     author_email='b.rosbag@let.ru.nl',
