@@ -1,9 +1,9 @@
 OpenSesame Plug-in: Experiment Manager
 ==========
 
-*An OpenSesame Plug-in for managing/executing multiple OpenSesame experiments.*  
+*An OpenSesame plug-in for managing/executing multiple OpenSesame experiments.*  
 
-Copyright, 2021, Bob Rosbag  
+Copyright, 2022, Bob Rosbag  
 
 
 ## 1. About
@@ -24,14 +24,14 @@ This plug-in has three options:
 ## 2. LICENSE
 ----------
 
-The Experiment Manager Plug-in is distributed under the terms of the GNU General Public License 3.
+The Experiment Manager plug-in is distributed under the terms of the GNU General Public License 3.
 The full license should be included in the file COPYING, or can be obtained from
 
 - <http://www.gnu.org/licenses/gpl.txt>
 
 This plug-in contains works of others.
-
-
+  
+  
 ## 3. Documentation
 ----------------
 

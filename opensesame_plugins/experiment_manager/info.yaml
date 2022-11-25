@@ -1,5 +1,5 @@
 description: Experiment Manager - start a opensesame experiment.
-version: 2020.1-1
+version: 2.3.0
 author: "Bob Rosbag"
 url: "http://osdoc.cogsci.nl/"
 category: "control"
@@ -33,5 +33,5 @@ controls:
     type: text
 -
     label:  |
-      <small>Experiment Manager version 2020.1-1</small>
+      <small>Experiment Manager version 2.3.0</small>
     type: "text"
