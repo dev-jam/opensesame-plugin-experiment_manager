@@ -35,6 +35,7 @@ setup(
     version='2.3.0',
     description='An OpenSesame Plug-in for managing/executing multiple OpenSesame experiments.',
     long_description=get_readme(),
+    long_description_content_type='text/markdown',
     author='Bob Rosbag',
     author_email='debian@bobrosbag.nl',
     url='https://github.com/dev-jam/opensesame-plugin-experiment_manager',
