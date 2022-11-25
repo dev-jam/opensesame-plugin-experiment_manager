@@ -25,10 +25,10 @@ setup(
     # Some general metadata. By convention, a plugin is named:
     # opensesame-plugin-[plugin name]
     name='opensesame-plugin-experiment_manager',
-    version='2.0.0',
+    version='2.1.0',
     description='An OpenSesame Plug-in for managing/executing multiple OpenSesame experiments.',
     author='Bob Rosbag',
-    author_email='b.rosbag@let.ru.nl',
+    author_email='debian@bobrosbag.nl',
     url='https://github.com/dev-jam/opensesame-plugin-experiment_manager',
     # Classifiers used by PyPi if you upload the plugin there
     classifiers=[
@@ -38,9 +38,9 @@ setup(
         'Environment :: Win32 (MS Windows)',
         'Environment :: X11 Applications',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
-        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
     ],
+    packages=[],
     # The important bit that specifies how the plugin files should be installed,
     # so that they are found by OpenSesame. This is a bit different from normal
     # Python modules, because an OpenSesame plugin is not a (normal) Python
