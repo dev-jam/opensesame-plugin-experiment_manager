@@ -32,7 +32,7 @@ def get_readme():
 
 setup(
     name='opensesame-plugin-experiment_manager',
-    version='2.3.0',
+    version='2.4.0',
     description='An OpenSesame Plug-in for managing/executing multiple OpenSesame experiments.',
     long_description=get_readme(),
     long_description_content_type='text/markdown',

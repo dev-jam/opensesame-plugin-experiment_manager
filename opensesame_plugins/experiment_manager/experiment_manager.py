@@ -26,7 +26,7 @@ from libopensesame.item import item
 from libqtopensesame.items.qtautoplugin import qtautoplugin
 from libopensesame.exceptions import osexception
 
-VERSION = u'2.3.0'
+VERSION = u'2.4.0'
 
 
 class experiment_manager(item):
