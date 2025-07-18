@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-    
+
+## [3.1.0] - 2025-07-17
+
+- license cleanup
+
 ## [3.0.1] - 2023-08-30
 
 - fixed dependencies
@@ -37,7 +41,8 @@ Final release for OpenSesame 3 API
 
 
 
-[Unreleased]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/3.0.1...HEAD
+[Unreleased]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/3.1.0...HEAD
+[3.1.0]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/3.0.1...3.1.0
 [3.0.1]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/2.4.0...3.0.0
 [2.4.0]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/v2.3.0...2.4.0
