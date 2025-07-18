@@ -6,8 +6,7 @@ OpenSesame Plug-in: Experiment Manager
 Copyright, 2022, Bob Rosbag  
 
 
-## 1. About
---------
+## About
 
 This plug-in can insert standalone OpenSesame Experiments within a main experiment. 
 It can run within a loop or sequence as an item. This makes it possible to run a number 
@@ -21,19 +20,14 @@ This plug-in has three options:
 - *Experiment file name* for Windows: hexadecimal or decimal value, for Linux: full path or port number.
 
 
-## 2. LICENSE
-----------
+## License
 
-The Experiment Manager plug-in is distributed under the terms of the GNU General Public License 3.
-The full license should be included in the file COPYING, or can be obtained from
+This software is distributed under the terms of the GNU General Public License 3. The full license should be included in the file `COPYING`, or can be obtained from:
 
 - <http://www.gnu.org/licenses/gpl.txt>
-
-This plug-in contains works of others.
   
   
-## 3. Documentation
-----------------
+## Documentation
 
 Installation instructions and documentation on OpenSesame are available on the documentation website:
 
