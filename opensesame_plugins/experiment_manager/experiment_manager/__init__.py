@@ -32,7 +32,7 @@ controls = [
         "initialisation of the parallel port</small>\n",
         "type": "text"
     }, {
-        "label": "<small>Experiment Manager version 3.0.1</small>\n",
+        "label": "<small>Experiment Manager version 3.1.0</small>\n",
         "type": "text"
     }
 ]
