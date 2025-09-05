@@ -47,14 +47,14 @@ class ExperimentManager(Item):
         home_path = os.path.dirname(self.experiment.logfile)
 
         exp_file_name = self.filename
-        log_file_name = exp_file_name + '_-_' + 'subject-' + str(subject_nr) + '.csv'
+        log_file_name = f"{exp_file_name}_-_subject-{subject_nr}.csv"
 
         exp_file_path = os.path.join(home_path, exp_file_name)
         log_file_path = os.path.join(home_path, log_file_name)
 
         command = 'opensesamerun'
-        subject_arg = '--subject=' + str(subject_nr)
-        log_arg = '--logfile=' + log_file_path
+        subject_arg = f"--subject={subject_nr}"
+        log_arg = f"--logfile={log_file_path}"
         screen_arg = '--fullscreen'
 
         args = [command, exp_file_path, subject_arg, log_arg, screen_arg]
@@ -65,11 +65,11 @@ class ExperimentManager(Item):
             try:
                 subprocess.call(args)
             except Exception as e:
-                raise OSException('Could not execute experiment\n\nMessage: %s' % e)
+                raise OSException(f"Could not execute experiment\n\nMessage: {e}")
         elif self.dummy_mode == 'yes':
             self._show_message('Dummy mode enabled, run phase')
         else:
-            self._show_message('Error with dummy mode, mode is: %s' % self.dummy_mode)
+            self._show_message(f"Error with dummy mode, mode is: {self.dummy_mode}")
 
     def _init_var(self):
         self.verbose = self.var.verbose
