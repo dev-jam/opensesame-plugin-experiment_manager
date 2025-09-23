@@ -67,7 +67,7 @@ jobs:
             VERSION="0.0.0"
           fi
           WHEEL_FILE=$(ls dist/*.whl | head -n 1)
-          wheel2deb "$WHEEL_FILE" --output deb_dist --deb-version "$VERSION"
+          wheel2deb build "$WHEEL_FILE" --output deb_dist --deb-version "$VERSION"
           ls -lh deb_dist
 
       # 7️⃣ Generate changelog
