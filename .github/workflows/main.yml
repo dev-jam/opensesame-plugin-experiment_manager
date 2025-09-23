@@ -79,8 +79,8 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name || 'manual-release-' + github.run_number }}
-          name: Release ${{ github.ref_name || 'manual-release-' + github.run_number }}
+          tag_name: ${{ github.ref_name || format('manual-release-{0}', github.run_number) }}
+          name: ${{ github.ref_name || format('manual-release-{0}', github.run_number) }}
           body_path: CHANGELOG.md
           draft: ${{ env.IS_TEST }}  # draft if it's a test release
           files: |
