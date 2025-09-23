@@ -1,0 +1,89 @@
+name: Python Package Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type'
+        required: true
+        default: 'real'
+        type: choice
+        options:
+          - real
+          - test
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'  # Matches real releases, e.g., 9.4.0
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      # Determine if this is a test release based on manual input
+      IS_TEST: ${{ github.event.inputs.release_type == 'test' }}
+
+    steps:
+      # 1️⃣ Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: |
+          pip install poetry twine wheel2deb changelog-cli
+
+      # 4️⃣ Build Python package
+      - name: Build Python package
+        run: |
+          poetry install --no-root
+          poetry build
+
+      # 5️⃣ Upload to PyPI or TestPyPI
+      - name: Upload to PyPI or TestPyPI
+        env:
+          TWINE_USERNAME: ${{ env.IS_TEST && secrets.TEST_PYPI_USERNAME || secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ env.IS_TEST && secrets.TEST_PYPI_PASSWORD || secrets.PYPI_PASSWORD }}
+        run: |
+          if [[ "${IS_TEST}" == "true" ]]; then
+            echo "Uploading to TestPyPI..."
+            twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+          else
+            echo "Uploading to PyPI..."
+            twine upload dist/*
+
+      # 6️⃣ Build .deb package from wheel
+      - name: Build .deb package from wheel (tag version)
+        run: |
+          # Use tag version from push, or fallback to 0.0.0 for manual trigger
+          VERSION=${GITHUB_REF_NAME#refs/tags/}
+          if [[ -z "$VERSION" ]]; then
+            VERSION="0.0.0"
+          fi
+          WHEEL_FILE=$(ls dist/*.whl | head -n 1)
+          wheel2deb "$WHEEL_FILE" --output deb_dist --deb-version "$VERSION"
+          ls -lh deb_dist
+
+      # 7️⃣ Generate changelog
+      - name: Generate changelog
+        run: |
+          changelog generate --from-latest-tag > CHANGELOG.md || echo "No changelog generated"
+          cat CHANGELOG.md || true
+
+      # 8️⃣ Create GitHub Release
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name || 'manual-release-' + github.run_number }}
+          name: Release ${{ github.ref_name || 'manual-release-' + github.run_number }}
+          body_path: CHANGELOG.md
+          draft: ${{ env.IS_TEST }}  # draft if it's a test release
+          files: |
+            dist/*.tar.gz
+            dist/*.whl
+            deb_dist/*.deb
