@@ -56,6 +56,7 @@ jobs:
           else
             echo "Uploading to PyPI..."
             twine upload dist/*
+          fi
 
       # 6️⃣ Build .deb package from wheel
       - name: Build .deb package from wheel (tag version)
