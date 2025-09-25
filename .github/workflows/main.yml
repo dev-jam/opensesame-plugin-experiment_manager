@@ -74,7 +74,8 @@ jobs:
           cd dist
           # Run wheel2deb with verbose output, capture logs on failure
           wheel2deb --verbose || (echo "Build failed, showing logs..." && cat wheel2deb.log || true && exit 1)
-          ls -lh deb_dist
+          ls -lh output
+          cd ..
 
       # 8️⃣ Generate changelog
       - name: Generate changelog
@@ -93,4 +94,4 @@ jobs:
           files: |
             dist/*.tar.gz
             dist/*.whl
-            deb_dist/*.deb
+            dist/output/*.deb
