@@ -58,26 +58,32 @@ jobs:
             twine upload dist/*
           fi
 
-      # 6️⃣ Build .deb package from wheel
+      # 6️⃣ Install Debian packaging tools
+      - name: Install Debian packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+
+      # 7️⃣ Build .deb package from wheel (tag version)
       - name: Build .deb package from wheel (tag version)
         run: |
-          # Use tag version from push, or fallback to 0.0.0 for manual trigger
           VERSION=${GITHUB_REF_NAME#refs/tags/}
           if [[ -z "$VERSION" ]]; then
             VERSION="0.0.0"
           fi
           cd dist
+          # Run wheel2deb with verbose output, capture logs on failure
           wheel2deb --verbose || (echo "Build failed, showing logs..." && cat wheel2deb.log || true && exit 1)
           ls -lh output
           cd ..
 
-      # 7️⃣ Generate changelog
+      # 8️⃣ Generate changelog
       - name: Generate changelog
         run: |
           changelog generate --from-latest-tag > CHANGELOG.md || echo "No changelog generated"
           cat CHANGELOG.md || true
 
-      # 8️⃣ Create GitHub Release
+      # 9️⃣ Create GitHub Release
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
