@@ -5,7 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [4.0.0] - 2026-10-16
+
+- fix running experiments on OpenSesame 4.1, where opensesamerun was removed:
+  experiments are now started with run_experiment.py and the Python
+  interpreter that runs OpenSesame
+- run_experiment.py can also be used on its own as a replacement for
+  opensesamerun, with the same options (--subject, --logfile, --fullscreen)
+- raise an error when the started experiment fails, instead of silently
+  continuing; when it is aborted by the user, log a warning and continue
+- raise an error when the experiment file does not exist
+- look up the experiment in the file pool and the experiment folder first,
+  and then in the log file folder as before
+- remove the unused qtExperimentManager class; OpenSesame creates the GUI
+  class itself, so the runtime part no longer imports Qt
+- read dummy mode and verbose mode in the prepare phase, so that changes
+  made by other items during the run phase do not affect them; the filename
+  is still read in the run phase, so that an earlier item can select the
+  experiment
+- replace the placeholder plugin description
+- code cleanup
 
 
 ## [3.2.0] - 2025-09-05
@@ -45,7 +64,8 @@ Final release for OpenSesame 3 API
 
 
 
-[Unreleased]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/3.2.0...HEAD
+[Unreleased]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.0...HEAD
+[4.0.0]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/3.2.0...4.0.0
 [3.2.0]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/3.1.0...3.2.0
 [3.1.0]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/3.0.1...3.1.0
 [3.0.1]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/3.0.0...3.0.1
