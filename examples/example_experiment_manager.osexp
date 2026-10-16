@@ -1,58 +1,65 @@
 ---
-API: 2
-OpenSesame: 3.0.7
+API: 3
+OpenSesame: 4.1.22
 Platform: posix
 ---
-set width 1024
+set width 1920
 set uniform_coordinates yes
 set title "New experiment"
 set subject_parity even
 set subject_nr 0
 set start experiment
-set sampler_backend legacy
-set mouse_backend legacy
-set keyboard_backend legacy
-set height 768
+set sound_sample_size -16
+set sound_freq 48000
+set sound_channels 2
+set sound_buf_size 1024
+set sampler_backend psycho
+set round_decimals 2
+set mouse_backend psycho
+set keyboard_backend psycho
+set height 1080
+set fullscreen no
+set form_clicks no
 set foreground white
+set font_underline no
 set font_size 18
-set font_italic no
+set font_italic False
 set font_family mono
-set font_bold no
-set experiment_path "/home/bob/src/git/opensesame_plugin_-_experiment_manager/examples"
+set font_bold False
+set experiment_path "/home/bob/Desktop/opensesame-plugin-experiment_manager-claude3/examples"
+set disable_garbage_collection False
 set description "Default description"
 set coordinates uniform
 set compensation 0
-set color_backend legacy
-set clock_backend legacy
-set canvas_backend legacy
+set color_backend psycho
+set clock_backend psycho
+set canvas_backend psycho
 set bidi no
 set background black
+
+define sketchpad done
+	set start_response_interval no
+	set reset_variables no
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=sans font_italic=no font_size=48 html=yes show_if=always text="Done!" x=0 y=0 z_index=0
 
 define sequence experiment
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
 	run new_loop always
-	run welcome always
-
-define notepad getting_started
-	__note__
-	Welcome to OpenSesame 3.0 "Interactive Ising"!
-	If you are new to OpenSesame, it is a good idea to follow one of the tutorials,
-	which can be found on the documentation site:
-	- <http://osdoc.cogsci.nl/>
-	You can also check out the examples. These can be opened via:
-	- Menu -> Tools -> Example experiments.
-	And feel free to ask for help on the forum:
-	- <http://forum.cogsci.nl/>
-	Have fun with OpenSesame!
-	__end__
-	set description "Some pointers to help you get started!"
+	run done always
 
 define experiment_manager new_experiment_manager
+	set verbose no
+	set filename "{exp}"
 	set experiment_fname "[exp]"
+	set dummy_mode no
 	set description "Experiment Manager Plugin"
 
 define loop new_loop
+	set source_file ""
+	set source table
 	set skip 0
 	set repeat 1
 	set order random
@@ -60,7 +67,9 @@ define loop new_loop
 	set item new_sequence
 	set description "Repeatedly runs another item"
 	set cycles 3
+	set continuous no
 	set column_order exp
+	set break_if_on_first yes
 	set break_if never
 	setcycle 0 exp "test1.osexp"
 	setcycle 1 exp "test2.osexp"
@@ -71,11 +80,4 @@ define sequence new_sequence
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
 	run new_experiment_manager always
-
-define sketchpad welcome
-	set start_response_interval no
-	set reset_variables no
-	set duration keypress
-	set description "Displays stimuli"
-	draw textline center=1 color=white font_bold=no font_family=serif font_italic=no font_size=32 html=yes show_if=always text="Done!" x=0 y=0 z_index=0
 

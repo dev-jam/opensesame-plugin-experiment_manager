@@ -1,46 +1,50 @@
 ---
-API: 2
-OpenSesame: 3.0.7
+API: 3
+OpenSesame: 4.1.22
 Platform: posix
 ---
-set width 1024
+set width 1920
 set uniform_coordinates yes
 set title "New experiment"
 set subject_parity even
 set subject_nr 0
 set start experiment
-set height 768
+set sound_sample_size -16
+set sound_freq 48000
+set sound_channels 2
+set sound_buf_size 1024
+set sampler_backend psycho
+set round_decimals 2
+set mouse_backend psycho
+set keyboard_backend psycho
+set height 1080
+set fullscreen no
+set form_clicks no
 set foreground white
+set font_underline no
+set font_size 18
+set font_italic False
+set font_family mono
+set font_bold False
+set experiment_path "/home/bob/Desktop/opensesame-plugin-experiment_manager-claude3/examples"
+set disable_garbage_collection False
 set description "Default description"
 set coordinates uniform
 set compensation 0
-set canvas_backend xpyriment
+set color_backend psycho
+set clock_backend psycho
+set canvas_backend psycho
 set background black
 
 define sequence experiment
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
-	run getting_started always
 	run welcome always
-
-define notepad getting_started
-	__note__
-	Welcome to OpenSesame 3.0 "Interactive Ising"!
-	If you are new to OpenSesame, it is a good idea to follow one of the tutorials,
-	which can be found on the documentation site:
-	- <http://osdoc.cogsci.nl/>
-	You can also check out the examples. These can be opened via:
-	- Menu -> Tools -> Example experiments.
-	And feel free to ask for help on the forum:
-	- <http://forum.cogsci.nl/>
-	Have fun with OpenSesame!
-	__end__
-	set description "Some pointers to help you get started!"
 
 define sketchpad welcome
 	set start_response_interval no
 	set reset_variables no
 	set duration keypress
 	set description "Displays stimuli"
-	draw textline center=1 color=white font_bold=no font_family=serif font_italic=no font_size=32 html=yes show_if=always text="Test 1" x=0 y=0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=sans font_italic=no font_size=48 html=yes show_if=always text="Test 1" x=0 y=0 z_index=0
 
