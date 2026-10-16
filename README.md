@@ -17,7 +17,7 @@ This plug-in has three options:
 
 - *Dummy mode* for testing experiments.
 - *Verbose mode* for testing experiments.
-- *Experiment file name* for Windows: hexadecimal or decimal value, for Linux: full path or port number.
+- *Experiment filename* full path or filename.
 
 
 ## License
