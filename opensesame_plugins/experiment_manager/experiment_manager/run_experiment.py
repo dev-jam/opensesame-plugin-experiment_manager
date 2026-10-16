@@ -20,9 +20,6 @@ same options.
 
 Usage: python run_experiment.py experiment.osexp [--subject=N]
        [--logfile=FILE] [--fullscreen]
-
-Exit codes: 0 = finished, 1 = error, 2 = invalid arguments, 3 = aborted by
-the user
 """
 
 __author__ = "Bob Rosbag"
@@ -33,68 +30,87 @@ import sys
 import random
 import argparse
 import traceback
-
-EXIT_OK = 0
-EXIT_ERROR = 1
-EXIT_USER_ABORTED = 3
+from enum import IntEnum
 
 
-def parse_args(argv):
-    parser = argparse.ArgumentParser(
-        prog='run_experiment.py',
-        description='Run an OpenSesame experiment without the GUI '
-                    '(replacement for opensesamerun)')
-    parser.add_argument('experiment', help='Experiment file (.osexp)')
-    parser.add_argument('-s', '--subject', type=int, default=0,
-                        help='Subject number (default: 0)')
-    parser.add_argument('-l', '--logfile',
-                        help='Log file (default: subject-<nr>.csv)')
-    parser.add_argument('-f', '--fullscreen', action='store_true',
-                        help='Run fullscreen')
-    args = parser.parse_args(argv)
-    if args.logfile is None:
-        args.logfile = f"subject-{args.subject}.csv"
-    return args
+class ExitCode(IntEnum):
+    OK = 0
+    ERROR = 1
+    INVALID_ARGUMENTS = 2  # also used by argparse and by Python itself
+    USER_ABORTED = 3
 
 
-def main(argv):
-    args = parse_args(argv)
-    exp_file_path = os.path.abspath(args.experiment)
-    if not os.path.isfile(exp_file_path):
-        print(f"Experiment file not found: {exp_file_path}", file=sys.stderr)
-        return EXIT_ERROR
+def run_experiment(exp_file_path, subject_nr=0, log_file_path=None,
+                   fullscreen=False):
+    """Runs an experiment and returns an ExitCode.
 
+    libopensesame is imported here, so that importing this module (for
+    ExitCode) and printing the help text stay fast.
+    """
     from libopensesame.experiment import Experiment
     from libopensesame.exceptions import UserAborted
 
+    exp_file_path = os.path.abspath(exp_file_path)
+    if not os.path.isfile(exp_file_path):
+        print(f"Experiment file not found: {exp_file_path}", file=sys.stderr)
+        return ExitCode.ERROR
+    if log_file_path is None:
+        log_file_path = f"subject-{subject_nr}.csv"
+
     exp = Experiment('Experiment', exp_file_path,
                      experiment_path=os.path.dirname(exp_file_path))
-    exp.set_subject(args.subject)
-    exp.var.fullscreen = 'yes' if args.fullscreen else 'no'
-    exp.logfile = os.path.abspath(args.logfile)
+    exp.set_subject(subject_nr)
+    exp.var.fullscreen = 'yes' if fullscreen else 'no'
+    exp.logfile = os.path.abspath(log_file_path)
     random.seed()
     try:
         # run() calls end() itself when the experiment finishes normally
         exp.run()
+        return ExitCode.OK
     except UserAborted as e:
-        _end(exp)
         print(f"Experiment aborted by the user: {e}", file=sys.stderr)
-        return EXIT_USER_ABORTED
-    except Exception:
         _end(exp)
+        return ExitCode.USER_ABORTED
+    except Exception:
         traceback.print_exc()
-        return EXIT_ERROR
+        _end(exp)
+        return ExitCode.ERROR
     finally:
         exp.pool.clean_up()
-    return EXIT_OK
 
 
 def _end(exp):
+    """Closes the display, sound and log after an experiment was
+    interrupted.
+    """
     try:
         exp.end()
     except Exception:
         traceback.print_exc()
 
 
+def parse_args(argv):
+    parser = argparse.ArgumentParser(
+        prog='run_experiment.py',
+        description='Run an OpenSesame experiment without the GUI '
+                    '(replacement for opensesamerun)',
+        epilog='Exit codes: 0 = finished, 1 = error, 2 = invalid arguments, '
+               '3 = aborted by the user')
+    parser.add_argument('experiment', help='experiment file (.osexp)')
+    parser.add_argument('-s', '--subject', type=int, default=0,
+                        help='subject number (default: 0)')
+    parser.add_argument('-l', '--logfile',
+                        help='log file (default: subject-<nr>.csv)')
+    parser.add_argument('-f', '--fullscreen', action='store_true',
+                        help='run fullscreen')
+    return parser.parse_args(argv)
+
+
+def main(argv=None):
+    args = parse_args(argv)
+    return run_experiment(args.experiment, args.subject, args.logfile,
+                          args.fullscreen)
+
+
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+    sys.exit(main())

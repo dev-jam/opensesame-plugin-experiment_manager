@@ -22,18 +22,17 @@ import os
 import sys
 import subprocess
 
-from libopensesame.py3compat import *
 from libopensesame.item import Item
-from libqtopensesame.items.qtautoplugin import QtAutoPlugin
 from libopensesame.exceptions import OSException
 from libopensesame.oslogging import oslogger
 
-from .run_experiment import EXIT_USER_ABORTED
+from .run_experiment import ExitCode
 
-RUNNER_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                           'run_experiment.py')
+RUN_EXPERIMENT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   'run_experiment.py')
 
 
+# The GUI class (QtExperimentManager) is created by OpenSesame from this class
 class ExperimentManager(Item):
 
     def reset(self):
@@ -46,61 +45,63 @@ class ExperimentManager(Item):
         self._init_var()
 
     def run(self):
-        self.subject_nr = self.var.subject_nr
-        self.filename = self.var.filename
+        # The filename is read in the run phase, so that an earlier item can
+        # select the experiment, for example based on input from the user
+        filename = str(self.var.filename)
+        exp_file_path = self._experiment_file_path(filename)
+        log_file_path = os.path.join(
+            self._log_folder(),
+            f"{filename}_-_subject-{self.var.subject_nr}.csv")
 
-        subject_nr = self.subject_nr
-        home_path = os.path.dirname(self.experiment.logfile)
-
-        exp_file_name = self.filename
-        log_file_name = f"{exp_file_name}_-_subject-{subject_nr}.csv"
-
-        exp_file_path = os.path.join(home_path, exp_file_name)
-        log_file_path = os.path.join(home_path, log_file_name)
-
-        # opensesamerun was removed in OpenSesame 4.1, so the experiment is
-        # started with run_experiment.py and the Python interpreter that runs
-        # OpenSesame
-        command = [sys.executable, RUNNER_PATH]
-        subject_arg = f"--subject={subject_nr}"
-        log_arg = f"--logfile={log_file_path}"
-        screen_arg = '--fullscreen'
-
-        args = command + [exp_file_path, subject_arg, log_arg, screen_arg]
+        # The experiment is started with the Python interpreter that runs
+        # OpenSesame, because opensesamerun was removed in OpenSesame 4.1
+        args = [sys.executable, RUN_EXPERIMENT_PATH, exp_file_path,
+                f"--subject={self.var.subject_nr}",
+                f"--logfile={log_file_path}", '--fullscreen']
         self._show_message(args)
         self.set_item_onset()
 
-        if self.dummy_mode == 'no':
-            if not os.path.isfile(exp_file_path):
-                raise OSException(f"Experiment file not found: {exp_file_path}")
-            try:
-                returncode = subprocess.call(args)
-            except Exception as e:
-                raise OSException(f"Could not execute experiment\n\nMessage: {e}")
-            if returncode == EXIT_USER_ABORTED:
-                oslogger.warning(f"Experiment was aborted: {exp_file_name}")
-            elif returncode != 0:
-                raise OSException(
-                    f"Experiment failed with exit code {returncode}: "
-                    f"{exp_file_name}\n\nSee the debug window or console "
-                    "for details")
-        elif self.dummy_mode == 'yes':
+        if self.dummy_mode:
             self._show_message('Dummy mode enabled, run phase')
         else:
-            self._show_message(f"Error with dummy mode, mode is: {self.dummy_mode}")
+            self._run_experiment(args, exp_file_path)
 
     def _init_var(self):
-        self.verbose = self.var.verbose
-        self.dummy_mode = self.var.dummy_mode
+        """Reads the settings in the prepare phase, so that changes made by
+        other items during the run phase do not affect them.
+        """
+        self.dummy_mode = self.var.dummy_mode == 'yes'
+        self.verbose = self.var.verbose == 'yes'
+
+    def _experiment_file_path(self, filename):
+        """Looks up the experiment in the file pool, which also covers the
+        folder of the current experiment. As in earlier versions, the folder
+        of the log file is used as a fallback.
+        """
+        if filename in self.experiment.pool:
+            return self.experiment.pool[filename]
+        return os.path.join(self._log_folder(), filename)
+
+    def _log_folder(self):
+        return os.path.dirname(self.experiment.logfile)
+
+    def _run_experiment(self, args, exp_file_path):
+        if not os.path.isfile(exp_file_path):
+            raise OSException(f"Experiment file not found: {exp_file_path}")
+        try:
+            returncode = subprocess.run(args).returncode
+        except OSError as e:
+            raise OSException(f"Could not execute experiment\n\nMessage: {e}")
+        exp_file_name = os.path.basename(exp_file_path)
+        if returncode == ExitCode.USER_ABORTED:
+            oslogger.warning(f"Experiment was aborted: {exp_file_name}")
+        elif returncode != ExitCode.OK:
+            raise OSException(
+                f"Experiment failed with exit code {returncode}: "
+                f"{exp_file_name}\n\nSee the debug window or console for "
+                "details")
 
     def _show_message(self, message):
         oslogger.debug(message)
-        if self.verbose == 'yes':
+        if self.verbose:
             print(message)
-
-
-class qtExperimentManager(ExperimentManager, QtAutoPlugin):
-
-    def __init__(self, name, experiment, script=None):
-        ExperimentManager.__init__(self, name, experiment, script)
-        QtAutoPlugin.__init__(self, __file__)

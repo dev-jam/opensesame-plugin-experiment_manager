@@ -1,4 +1,4 @@
-"""A docstring with a description of the plugin"""
+"""Runs another OpenSesame experiment"""
 
 # The category determines the group for the plugin in the item toolbar
 category = "control"
