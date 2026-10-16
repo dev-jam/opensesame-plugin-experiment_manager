@@ -19,6 +19,7 @@ __author__ = "Bob Rosbag"
 __license__ = "GPLv3"
 
 import os
+import sys
 import subprocess
 
 from libopensesame.py3compat import *
@@ -26,6 +27,11 @@ from libopensesame.item import Item
 from libqtopensesame.items.qtautoplugin import QtAutoPlugin
 from libopensesame.exceptions import OSException
 from libopensesame.oslogging import oslogger
+
+from .run_experiment import EXIT_USER_ABORTED
+
+RUNNER_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           'run_experiment.py')
 
 
 class ExperimentManager(Item):
@@ -52,20 +58,32 @@ class ExperimentManager(Item):
         exp_file_path = os.path.join(home_path, exp_file_name)
         log_file_path = os.path.join(home_path, log_file_name)
 
-        command = 'opensesamerun'
+        # opensesamerun was removed in OpenSesame 4.1, so the experiment is
+        # started with run_experiment.py and the Python interpreter that runs
+        # OpenSesame
+        command = [sys.executable, RUNNER_PATH]
         subject_arg = f"--subject={subject_nr}"
         log_arg = f"--logfile={log_file_path}"
         screen_arg = '--fullscreen'
 
-        args = [command, exp_file_path, subject_arg, log_arg, screen_arg]
+        args = command + [exp_file_path, subject_arg, log_arg, screen_arg]
         self._show_message(args)
         self.set_item_onset()
 
         if self.dummy_mode == 'no':
+            if not os.path.isfile(exp_file_path):
+                raise OSException(f"Experiment file not found: {exp_file_path}")
             try:
-                subprocess.call(args)
+                returncode = subprocess.call(args)
             except Exception as e:
                 raise OSException(f"Could not execute experiment\n\nMessage: {e}")
+            if returncode == EXIT_USER_ABORTED:
+                oslogger.warning(f"Experiment was aborted: {exp_file_name}")
+            elif returncode != 0:
+                raise OSException(
+                    f"Experiment failed with exit code {returncode}: "
+                    f"{exp_file_name}\n\nSee the debug window or console "
+                    "for details")
         elif self.dummy_mode == 'yes':
             self._show_message('Dummy mode enabled, run phase')
         else:
