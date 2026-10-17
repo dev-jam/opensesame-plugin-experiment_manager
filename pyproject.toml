@@ -12,7 +12,7 @@ homepage = "https://github.com/dev-jam/opensesame-plugin-experiment_manager"
 repository = "https://github.com/dev-jam/opensesame-plugin-experiment_manager"
 
 [tool.poetry.dependencies]
-python = ">= 3.7"
+python = ">= 3.10"
 
 [build-system]
 requires = ["poetry-core"]
