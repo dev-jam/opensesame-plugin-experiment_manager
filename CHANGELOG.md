@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [4.0.1] - 2026-10-17
+- fixed license in package metadata (was shown as proprietary on PyPI)
+- fix dependency
+
 ## [4.0.0] - 2026-10-16
 
 - fix running experiments on OpenSesame 4.1, where opensesamerun was removed:
@@ -25,7 +29,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   experiment
 - replace the placeholder plugin description
 - code cleanup
-
 
 ## [3.2.0] - 2025-09-05
 
@@ -64,7 +67,8 @@ Final release for OpenSesame 3 API
 
 
 
-[Unreleased]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.0...HEAD
+[Unreleased]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.1...HEAD
+[4.0.1]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/3.2.0...4.0.0
 [3.2.0]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/3.1.0...3.2.0
 [3.1.0]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/3.0.1...3.1.0
