@@ -1,5 +1,7 @@
 """Runs another OpenSesame experiment"""
 
+from .. import __version__
+
 # The category determines the group for the plugin in the item toolbar
 category = "control"
 # Defines the GUI controls
@@ -32,7 +34,7 @@ controls = [
         "initialisation of the parallel port</small>\n",
         "type": "text"
     }, {
-        "label": "<small>Experiment Manager version 4.0.1</small>\n",
+        "label": f"<small>Experiment Manager version {__version__}</small>\n",
         "type": "text"
     }
 ]

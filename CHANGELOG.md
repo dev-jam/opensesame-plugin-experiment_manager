@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+- the version label in the item is read from the installed package, so the
+  version is only set in `pyproject.toml`
+
 ## [4.0.1] - 2026-10-17
 - fixed license in package metadata (was shown as proprietary on PyPI)
 - fix dependency
