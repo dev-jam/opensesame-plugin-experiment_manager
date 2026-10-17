@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+- the experiment is looked up in the log file folder first again, as in 3.2.0,
+  and only then in the file pool and the experiment folder
+- the started experiment logs `experiment_file` again, as with opensesamerun
+
 ## [4.0.2] - 2026-10-17
 
 - the version label in the item is read from the installed package, so the

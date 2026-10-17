@@ -57,8 +57,9 @@ def run_experiment(exp_file_path, subject_nr=0, log_file_path=None,
     if log_file_path is None:
         log_file_path = f"subject-{subject_nr}.csv"
 
+    # As opensesamerun did, pass the file path: this also sets experiment_file
     exp = Experiment('Experiment', exp_file_path,
-                     experiment_path=os.path.dirname(exp_file_path))
+                     experiment_path=exp_file_path)
     exp.set_subject(subject_nr)
     exp.var.fullscreen = 'yes' if fullscreen else 'no'
     exp.logfile = os.path.abspath(log_file_path)

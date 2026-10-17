@@ -74,13 +74,14 @@ class ExperimentManager(Item):
         self.verbose = self.var.verbose == 'yes'
 
     def _experiment_file_path(self, filename):
-        """Looks up the experiment in the file pool, which also covers the
-        folder of the current experiment. As in earlier versions, the folder
-        of the log file is used as a fallback.
+        """Looks up the experiment in the folder of the log file, as in
+        earlier versions. If it is not there, the file pool is used, which
+        also covers the folder of the current experiment.
         """
-        if filename in self.experiment.pool:
-            return self.experiment.pool[filename]
-        return os.path.join(self._log_folder(), filename)
+        path = os.path.join(self._log_folder(), filename)
+        if os.path.isfile(path) or filename not in self.experiment.pool:
+            return path
+        return self.experiment.pool[filename]
 
     def _log_folder(self):
         return os.path.dirname(self.experiment.logfile)
