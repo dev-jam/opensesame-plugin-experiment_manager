@@ -29,11 +29,6 @@ controls = [
         "windowed mode!\n",
         "type": "text"
     }, {
-        "label": "<small><b>Note:</b> Parallel Port Trigger Init item "
-        "at the begin of the experiment is needed for "
-        "initialisation of the parallel port</small>\n",
-        "type": "text"
-    }, {
         "label": f"<small>Experiment Manager version {__version__}</small>\n",
         "type": "text"
     }

@@ -15,8 +15,8 @@ You should have received a copy of the GNU General Public License
 along with OpenSesame.  If not, see <http://www.gnu.org/licenses/>.
 
 Runs a single OpenSesame experiment without the GUI. This replaces the
-opensesamerun command, which was removed in OpenSesame 4.1, and accepts the
-same options.
+opensesamerun command, which no longer works in OpenSesame 4.1, and accepts
+its options --subject, --logfile and --fullscreen.
 
 Usage: python run_experiment.py experiment.osexp [--subject=N]
        [--logfile=FILE] [--fullscreen]

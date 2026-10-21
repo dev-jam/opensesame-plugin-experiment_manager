@@ -54,7 +54,7 @@ class ExperimentManager(Item):
             f"{filename}_-_subject-{self.var.subject_nr}.csv")
 
         # The experiment is started with the Python interpreter that runs
-        # OpenSesame, because opensesamerun was removed in OpenSesame 4.1
+        # OpenSesame, because opensesamerun no longer works in OpenSesame 4.1
         args = [sys.executable, RUN_EXPERIMENT_PATH, exp_file_path,
                 f"--subject={self.var.subject_nr}",
                 f"--logfile={log_file_path}", '--fullscreen']
@@ -97,7 +97,8 @@ class ExperimentManager(Item):
         try:
             returncode = subprocess.run(args).returncode
         except OSError as e:
-            raise OSException(f"Could not execute experiment\n\nMessage: {e}")
+            raise OSException(
+                f"Could not execute experiment\n\nMessage: {e}") from e
         exp_file_name = os.path.basename(exp_file_path)
         if returncode == ExitCode.USER_ABORTED:
             oslogger.warning(f"Experiment was aborted: {exp_file_name}")

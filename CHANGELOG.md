@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - fixed: since 4.0.0, when the participant aborted the started experiment
   (Escape, then Q) during a key wait in an inline script, the main experiment
   stopped with an error instead of logging a warning and continuing
+- remove a note about the parallel port trigger plug-in from the item, which
+  was copied from that plug-in
+- describe the file lookup, the log file, errors and the use of
+  run_experiment.py on its own in the readme; links use https
+- code cleanup
 
 ## [4.0.3] - 2026-10-18
 
