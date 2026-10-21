@@ -24,6 +24,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - the main experiment no longer has to run windowed: fullscreen works with
   the PsychoPy backend; with the legacy backend, windowed is still advised,
   because the main experiment may not get the keyboard back
+- dummy mode also checks that the experiment file exists, so a dummy run
+  fails like a real run
 
 ## [4.0.3] - 2026-10-18
 

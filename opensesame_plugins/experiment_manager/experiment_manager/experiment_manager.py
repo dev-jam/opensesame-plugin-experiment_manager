@@ -59,12 +59,15 @@ class ExperimentManager(Item):
                 f"--subject={self.var.subject_nr}",
                 f"--logfile={log_file_path}", '--fullscreen']
         self._show_message(args)
+        # Also in dummy mode, so that a dummy run fails like a real one
+        if not os.path.isfile(exp_file_path):
+            raise OSException(f"Experiment file not found: {exp_file_path}")
         self.set_item_onset()
 
         if self.dummy_mode:
             self._show_message('Dummy mode enabled, run phase')
         else:
-            self._run_experiment(args, exp_file_path)
+            self._run_experiment(args, os.path.basename(exp_file_path))
 
     def _init_var(self):
         """Reads the settings in the prepare phase, so that changes made by
@@ -91,15 +94,12 @@ class ExperimentManager(Item):
     def _log_folder(self):
         return os.path.dirname(self.experiment.logfile)
 
-    def _run_experiment(self, args, exp_file_path):
-        if not os.path.isfile(exp_file_path):
-            raise OSException(f"Experiment file not found: {exp_file_path}")
+    def _run_experiment(self, args, exp_file_name):
         try:
             returncode = subprocess.run(args).returncode
         except OSError as e:
             raise OSException(
                 f"Could not execute experiment\n\nMessage: {e}") from e
-        exp_file_name = os.path.basename(exp_file_path)
         if returncode == ExitCode.USER_ABORTED:
             oslogger.warning(f"Experiment was aborted: {exp_file_name}")
         elif returncode != ExitCode.OK:
