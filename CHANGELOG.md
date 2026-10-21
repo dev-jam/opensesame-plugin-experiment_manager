@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - describe the file lookup, the log file, errors and the use of
   run_experiment.py on its own in the readme; links use https
 - code cleanup
+- run_experiment.py passes subject, fullscreen and log file to the
+  Experiment constructor, as OpenSesame's own runner does, and no longer
+  seeds random itself (Experiment.run() already does)
 
 ## [4.0.3] - 2026-10-18
 

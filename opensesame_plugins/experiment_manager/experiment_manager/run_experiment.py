@@ -27,7 +27,6 @@ __license__ = "GPLv3"
 
 import os
 import sys
-import random
 import argparse
 import traceback
 from enum import IntEnum
@@ -58,13 +57,12 @@ def run_experiment(exp_file_path, subject_nr=0, log_file_path=None,
 
     # As opensesamerun did, pass the file path: this also sets experiment_file
     exp = Experiment('Experiment', exp_file_path,
-                     experiment_path=exp_file_path)
-    exp.set_subject(subject_nr)
-    exp.var.fullscreen = 'yes' if fullscreen else 'no'
-    exp.logfile = os.path.abspath(log_file_path)
-    random.seed()
+                     experiment_path=exp_file_path, fullscreen=fullscreen,
+                     subject_nr=subject_nr,
+                     logfile=os.path.abspath(log_file_path))
     try:
-        # run() calls end() itself when the experiment finishes normally
+        # run() seeds the random generators and calls end() itself when the
+        # experiment finishes normally
         exp.run()
         return ExitCode.OK
     except Exception as e:
