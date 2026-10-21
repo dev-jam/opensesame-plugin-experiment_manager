@@ -25,8 +25,10 @@ controls = [
         "type": "filepool",
         "var": "filename"
     }, {
-        "label": "<b>IMPORTANT:</b> The experiment should be started in "
-        "windowed mode!\n",
+        "label": "<b>Note:</b> With the legacy backend, start the main "
+        "experiment in windowed mode: in fullscreen mode it may not get the "
+        "keyboard back after the started experiment. With the PsychoPy "
+        "backend, fullscreen mode works.\n",
         "type": "text"
     }, {
         "label": f"<small>Experiment Manager version {__version__}</small>\n",

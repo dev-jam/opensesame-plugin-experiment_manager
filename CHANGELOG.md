@@ -21,6 +21,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - run_experiment.py passes subject, fullscreen and log file to the
   Experiment constructor, as OpenSesame's own runner does, and no longer
   seeds random itself (Experiment.run() already does)
+- the main experiment no longer has to run windowed: fullscreen works with
+  the PsychoPy backend; with the legacy backend, windowed is still advised,
+  because the main experiment may not get the keyboard back
 
 ## [4.0.3] - 2026-10-18
 

@@ -19,8 +19,10 @@ This plug-in has three options:
 - *Verbose mode* for testing experiments.
 - *Experiment filename* full path or filename.
 
-The main experiment must run in windowed mode; the started experiment runs
-fullscreen. The experiment file is looked up in the folder of the log file
+The started experiment runs fullscreen. The main experiment can also run
+fullscreen with the PsychoPy backend. With the legacy backend, run the main
+experiment windowed: in fullscreen it may not get the keyboard back after the
+started experiment ends (seen on Linux). The experiment file is looked up in the folder of the log file
 first, and then in the file pool (which includes the folder of the main
 experiment). The filename may be a variable, for example set by an earlier
 item. The started experiment uses the subject number of the main experiment
