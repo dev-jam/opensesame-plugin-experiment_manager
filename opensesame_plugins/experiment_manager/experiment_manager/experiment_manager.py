@@ -70,7 +70,12 @@ class ExperimentManager(Item):
         """Reads the settings in the prepare phase, so that changes made by
         other items during the run phase do not affect them.
         """
-        self.dummy_mode = self.var.dummy_mode == 'yes'
+        dummy_mode = self.var.dummy_mode
+        # Any other value would start the experiment, which 3.2.0 did not do
+        if dummy_mode not in ('yes', 'no'):
+            raise OSException(
+                f"Dummy mode must be 'yes' or 'no', not '{dummy_mode}'")
+        self.dummy_mode = dummy_mode == 'yes'
         self.verbose = self.var.verbose == 'yes'
 
     def _experiment_file_path(self, filename):
