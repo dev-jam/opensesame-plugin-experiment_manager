@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [4.0.4] - 2026-10-21
 
 - fixed: since 4.0.0, a dummy mode value other than 'yes' or 'no' (e.g. from
   a variable) started the experiment; 3.2.0 did not start it and only logged
@@ -101,7 +101,8 @@ Final release for OpenSesame 3 API
 
 
 
-[Unreleased]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.3...HEAD
+[Unreleased]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.4...HEAD
+[4.0.4]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.3...4.0.4
 [4.0.3]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.2...4.0.3
 [4.0.2]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.1...4.0.2
 [4.0.1]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.0...4.0.1
