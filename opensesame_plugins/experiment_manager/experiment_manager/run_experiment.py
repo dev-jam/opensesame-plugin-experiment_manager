@@ -48,7 +48,6 @@ def run_experiment(exp_file_path, subject_nr=0, log_file_path=None,
     ExitCode) and printing the help text stay fast.
     """
     from libopensesame.experiment import Experiment
-    from libopensesame.exceptions import UserAborted
 
     exp_file_path = os.path.abspath(exp_file_path)
     if not os.path.isfile(exp_file_path):
@@ -68,16 +67,35 @@ def run_experiment(exp_file_path, subject_nr=0, log_file_path=None,
         # run() calls end() itself when the experiment finishes normally
         exp.run()
         return ExitCode.OK
-    except UserAborted as e:
-        print(f"Experiment aborted by the user: {e}", file=sys.stderr)
+    except Exception as e:
+        user_aborted = _user_aborted(e)
+        if user_aborted is None:
+            traceback.print_exc()
+            exit_code = ExitCode.ERROR
+        else:
+            print(f"Experiment aborted by the user: {user_aborted}",
+                  file=sys.stderr)
+            exit_code = ExitCode.USER_ABORTED
         _end(exp)
-        return ExitCode.USER_ABORTED
-    except Exception:
-        traceback.print_exc()
-        _end(exp)
-        return ExitCode.ERROR
+        return exit_code
     finally:
         exp.pool.clean_up()
+
+
+def _user_aborted(e):
+    """Returns the UserAborted exception that caused e, or None.
+
+    An inline_script wraps every exception in a PythonError, so an abort
+    with Escape during keyboard.get_key() in an inline script only shows up
+    in the chain of causes.
+    """
+    from libopensesame.exceptions import UserAborted
+
+    while e is not None:
+        if isinstance(e, UserAborted):
+            return e
+        e = e.__cause__ or e.__context__
+    return None
 
 
 def _end(exp):

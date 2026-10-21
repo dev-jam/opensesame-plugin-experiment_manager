@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - fixed: since 4.0.0, a dummy mode value other than 'yes' or 'no' (e.g. from
   a variable) started the experiment; 3.2.0 did not start it and only logged
   a message. Now it raises an error
+- fixed: since 4.0.0, when the participant aborted the started experiment
+  (Escape, then Q) during a key wait in an inline script, the main experiment
+  stopped with an error instead of logging a warning and continuing
 
 ## [4.0.3] - 2026-10-18
 
