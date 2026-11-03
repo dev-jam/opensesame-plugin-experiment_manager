@@ -1,0 +1,26 @@
+Source: opensesame-plugin-experiment-manager
+Section: python
+Priority: optional
+Maintainer: Bob Rosbag <debian@bobrosbag.nl>
+Build-Depends: debhelper-compat (= 13),
+               dh-sequence-python3,
+               pybuild-plugin-pyproject,
+               python3-all,
+               python3-poetry-core,
+Standards-Version: 4.7.2
+Rules-Requires-Root: no
+Homepage: https://github.com/dev-jam/opensesame-plugin-experiment_manager
+Vcs-Browser: https://github.com/dev-jam/opensesame-plugin-experiment_manager/tree/debian/latest
+Vcs-Git: https://github.com/dev-jam/opensesame-plugin-experiment_manager.git -b debian/latest
+
+Package: python3-opensesame-plugin-experiment-manager
+Architecture: all
+# OpenSesame (and PsychoPy) are not in Debian yet: add them to Depends
+# when they are.
+Depends: ${misc:Depends},
+         ${python3:Depends},
+Description: OpenSesame plugin for running other experiments in an experiment
+ This plugin for the OpenSesame experiment builder runs another
+ OpenSesame experiment in a separate process, as part of a parent
+ experiment, for example to run several experiments in one
+ session.
