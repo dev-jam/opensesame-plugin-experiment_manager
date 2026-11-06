@@ -1,18 +1,22 @@
 """
-This file is part of OpenSesame.
+This file is part of opensesame-plugin-experiment_manager.
 
-OpenSesame is free software: you can redistribute it and/or modify
+Copyright (C) 2015-2026 Bob Rosbag <mail@bobrosbag.nl>
+
+This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-OpenSesame is distributed in the hope that it will be useful,
+This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with OpenSesame.  If not, see <http://www.gnu.org/licenses/>.
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+SPDX-License-Identifier: GPL-3.0-or-later
 
 Runs a single OpenSesame experiment without the GUI. This replaces the
 opensesamerun command, which no longer works in OpenSesame 4.1, and accepts
@@ -23,7 +27,7 @@ Usage: python run_experiment.py experiment.osexp [--subject=N]
 """
 
 __author__ = "Bob Rosbag"
-__license__ = "GPLv3"
+__license__ = "GPL-3.0-or-later"
 
 import os
 import sys
