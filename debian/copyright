@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: opensesame-plugin-experiment_manager
-Upstream-Contact: Bob Rosbag <debian@bobrosbag.nl>
+Upstream-Contact: Bob Rosbag <mail@bobrosbag.nl>
 Source: https://github.com/dev-jam/opensesame-plugin-experiment_manager
 
 Files: *
