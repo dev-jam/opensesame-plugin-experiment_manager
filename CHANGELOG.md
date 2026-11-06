@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [4.0.5] - 2026-11-06
+
+- changed: the licence is stated as GPL-3.0-or-later (README, `__license__`); the source files carry a copyright notice instead of the header of the OpenSesame example plugin; the copyright years in the README run from the first release; the authors e-mail is mail@bobrosbag.nl
+
 ## [4.0.4] - 2026-10-21
 
 - fixed: since 4.0.0, a dummy mode value other than 'yes' or 'no' (e.g. from
@@ -101,7 +105,8 @@ Final release for OpenSesame 3 API
 
 
 
-[Unreleased]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.4...HEAD
+[Unreleased]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.5...HEAD
+[4.0.5]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.4...4.0.5
 [4.0.4]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.3...4.0.4
 [4.0.3]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.2...4.0.3
 [4.0.2]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.1...4.0.2
