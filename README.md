@@ -1,23 +1,26 @@
-OpenSesame Plug-in: Experiment Manager
+OpenSesame Plugin: Experiment Manager
 ==========
 
-*An OpenSesame plug-in for managing/executing multiple OpenSesame experiments.*  
+*An OpenSesame plugin for running other OpenSesame experiments within an experiment.*  
 
 Copyright (C) 2015-2026 Bob Rosbag  
 
 
 ## About
 
-This plug-in can insert standalone OpenSesame Experiments within a main experiment. 
-It can run within a loop or sequence as an item. This makes it possible to run a number 
-of experiments in sequence (random or fixed order) and also it gives the possibility to 
-give each experiment its own (different) backend. 
+This plugin runs a standalone OpenSesame experiment as an item of a main
+experiment, in a separate process. As an item in a loop or sequence, it can
+run a number of experiments in a fixed or random order, and each experiment
+can have its own backend.
 
-This plug-in has three options:
+The item has three settings:
 
-- *Dummy mode* for testing experiments.
-- *Verbose mode* for testing experiments.
-- *Experiment filename* full path or filename.
+- *Dummy Mode*: the experiment file is checked, but the experiment is not
+  started; for testing the main experiment.
+- *Verbose Mode*: prints what the item does, e.g. the command that starts
+  the experiment.
+- *Experiment file name*: a filename or a full path (see below where the
+  file is looked up).
 
 The started experiment runs fullscreen. The main experiment can also run
 fullscreen with the PsychoPy backend. With the legacy backend, run the main
@@ -39,7 +42,7 @@ continues.
 ## Running an experiment without the GUI
 
 The experiment is started with `run_experiment.py`, which is part of this
-plug-in. It can also be used on its own, as a replacement for
+plugin. It can also be used on its own, as a replacement for
 `opensesamerun` (which no longer works in OpenSesame 4.1). Use the Python
 interpreter of OpenSesame:
 
@@ -47,6 +50,13 @@ interpreter of OpenSesame:
 
 Exit codes: 0 = finished, 1 = error, 2 = invalid arguments, 3 = aborted by
 the user.
+
+
+## Installation
+
+Install the plugin with pip, in the Python environment of OpenSesame:
+
+    pip install opensesame-plugin-experiment_manager
 
 
 ## License
