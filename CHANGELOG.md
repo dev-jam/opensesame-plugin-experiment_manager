@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [4.0.6] - 2026-11-08
+
+- readme and package description: what the plugin does in clearer words, what each setting does, installation with pip
+- item descriptions (shown for new items) say what each item does, in the same form for all items; items in saved experiments keep their description
+
 ## [4.0.5] - 2026-11-06
 
 - changed: the licence is stated as GPL-3.0-or-later (README, `__license__`); the source files carry a copyright notice instead of the header of the OpenSesame example plugin; the copyright years in the README run from the first release; the authors e-mail is mail@bobrosbag.nl
@@ -105,7 +110,8 @@ Final release for OpenSesame 3 API
 
 
 
-[Unreleased]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.5...HEAD
+[Unreleased]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.6...HEAD
+[4.0.6]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.5...4.0.6
 [4.0.5]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.4...4.0.5
 [4.0.4]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.3...4.0.4
 [4.0.3]: https://github.com/dev-jam/opensesame-plugin-experiment_manager/compare/4.0.2...4.0.3

@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "opensesame-plugin-experiment_manager"
-version = "4.0.5"
-description = "An OpenSesame Plug-in for managing/executing multiple OpenSesame experiments."
+version = "4.0.6"
+description = "OpenSesame plugin for running other OpenSesame experiments within an experiment"
 authors = ["Bob Rosbag <mail@bobrosbag.nl>"]
 readme = "README.md"
 packages = [

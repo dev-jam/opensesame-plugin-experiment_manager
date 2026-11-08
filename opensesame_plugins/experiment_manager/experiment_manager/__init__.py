@@ -1,7 +1,7 @@
 # Copyright (C) 2015-2026 Bob Rosbag <mail@bobrosbag.nl>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Runs another OpenSesame experiment"""
+"""Experiment Manager - runs another OpenSesame experiment"""
 
 from .. import __version__
 
