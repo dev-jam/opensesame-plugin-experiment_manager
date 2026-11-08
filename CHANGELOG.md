@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 - readme and package description: what the plugin does in clearer words, what each setting does, installation with pip
+- item descriptions (shown for new items) say what each item does, in the same form for all items; items in saved experiments keep their description
 
 ## [4.0.5] - 2026-11-06
 
